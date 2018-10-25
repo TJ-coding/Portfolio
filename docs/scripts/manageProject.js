@@ -12,7 +12,7 @@ function loadDoc() {
   xhttp.send();
 }
 
-function dealWithData(var dataString){
+function dealWithData(dataString){
 	alert(dataString);
 	var dataObject=JSON.parse(dataString)["projectDatabase"];
   var numberOfProjects=dataObject.length;
@@ -27,10 +27,9 @@ function dealWithData(var dataString){
     //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
     appendDrawLeaf(renderPosition, dataObject["Title"], dataObject["InnterText"]);
   }
-	makeLeaves(dataObject);
 }
 
-function appendDrawLeaf(var position,var title,var innterHtml){
+function appendDrawLeaf(position,title,innterHtml){
   var divId
   if(renderPosition=="right"){
     divId="leftBranch"
@@ -52,5 +51,4 @@ function appendDrawLeaf(var position,var title,var innterHtml){
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
 function makeLeaves(){
 	loadDoc()
-	alert(JSON.stringify(dataObject))
 }
