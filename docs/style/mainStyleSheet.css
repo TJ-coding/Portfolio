@@ -1,5 +1,5 @@
 :root {
-  --bgC: #bde1e9;
+  --bgC: rgba(50, 51, 119, 0.5);
   --bigTitleText:#524f81;
   --mainTitleHeight:4em;
 }
@@ -9,27 +9,39 @@
 	text-decoration: none;
 	padding: 0px;
 }
+#mainTitleBox{
+	background-color: rgba(255,255,255,0.3);
+	width: 16em; 
+	display: inline-block;
+	margin-bottom: 1em;
+	border-top-right-radius: 80px;
+	border-top-left-radius: 80px;
+}
 .mainTitle div{
-	padding: 0px;
-	margin: 0px;
 	height: var(--mainTitleHeight);
 }
 .mainTitle h1{
-	color: var(--bigTitleText);
+	color:rgb(69,73,78);
 	margin: 0;
 	line-height: 1.3em;
-	font-family: 'Bungee', cursive;
+	font-family: 'Chakra Petch', sans-serif;
 	font-weight: 900;
 }
 .mainTitle a{
 	text-decoration: none;
-	font-family: 'Bungee', cursive;
+	font-family: 'Teko', sans-serif;
 }
 .mainTitle hr{
 	width: 5em;
+	border-width: 1px;
+	border-color: rgba(50, 51, 119, 0.5);
 }
 body{
-	background-color: var(--bgC);
+	background-image: url("file:///D:/programming/xampp/htdocs/docs/resource/background.svg");
+
+    background-size:     cover;            
+    background-repeat:   no-repeat;
+    background-position: center center; 
 }
 
 #svgContainer{
@@ -42,19 +54,27 @@ body{
 }
 #verticleLine{
 	display: absolute;
-	  stroke: #555555; stroke-width:1
+	  stroke: rgb(69,73,78); stroke-width:0.8
 }
 
 .branch{
-	width: 45%;
+	width: 50%;
 }
 #leftBranch{
 	float:left;
-	color: red;
 	text-align:right;
 }
 #rightBranch{
 	float: right;
-	background-color: red;
+}
 
+#projectLeaf{
+	padding-left: 10%;
+	padding-right:10%;
+	background-color: rgba(255,255,255,0.3);
+	border-bottom: 3px solid rgb(69,73,78);;
+}
+
+#projectLeafSpace{
+	height: 20%;
 }

@@ -13,7 +13,7 @@ function loadDoc() {
 }
 
 function dealWithData(dataString){
-	var dataObject=JSON.parse(dataString)["projectDatabase"];
+  var dataObject=JSON.parse(dataString)["projectDatabase"];
   var numberOfProjects=dataObject.length;
   var renderPosition
   for (var i = 0; i < numberOfProjects; i++) {
@@ -49,5 +49,5 @@ function appendDrawLeaf(position,title,innerHtml){
 //call flow
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
 function makeLeaves(){
-	loadDoc()
+  loadDoc()
 }

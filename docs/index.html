@@ -4,22 +4,25 @@
 	<script src="scripts/manageProject.js"></script>
 
 	<!---Importing fonts-->
-<link href="https://fonts.googleapis.com/css?family=Bungee|Teko" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Chakra+Petch|Teko" rel="stylesheet">
 <!--Scripts-->
 <script type="text/javascript">
 	function adjustSize(){
 		var windowHeight=window.innerHeight;
 		var titleBoxHeight = document.getElementById('mainTitleBox').clientHeight;
 		document.getElementById('verticleLineSVGBox').setAttribute("height", windowHeight-titleBoxHeight - 64);
-	}
+			}
 </script>
 </head>
 <body onload="adjustSize();makeLeaves()" onresize="adjustSize();">
+
+<div style="width: 100%; text-align: center;">
 <div id="mainTitleBox" class="mainTitle">
 	<h1>MY PAST PROJECTS</h1>
-	<a href="https://github.com/TJ-coding?tab=repositories">My repositories</a>
+	<a href="https://github.com/TJ-coding?tab=repositories">REPOSITORY</a>
 	<hr>
 	<br>
+</div>
 </div>
 
 <div id="svgContainer">
@@ -28,12 +31,12 @@
 </svg>
 </div>
 
-<div style="width: 90vw">
+<div style="width: 100%">
 <div class="branch" id="leftBranch">
-	First DIV
+	<div id="projectLeafSpace"></div>
 </div>
 <div class="branch" id="rightBranch">
-	Second DIV
+
 </div>
 </div>
 </body>
