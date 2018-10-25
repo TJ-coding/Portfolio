@@ -1,6 +1,9 @@
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="style/mainStyleSheet.css">
+	<script type="text/javascript">
+		import * as mp from '/scripts/manageProject.js';
+	</script>
 	<!---Importing fonts-->
 <link href="https://fonts.googleapis.com/css?family=Bungee|Teko" rel="stylesheet">
 <!--Scripts-->
@@ -12,7 +15,7 @@
 	}
 </script>
 </head>
-<body onload="adjustSize();" onresize="adjustSize();">
+<body onload="adjustSize();makeLeaves()" onresize="adjustSize();">
 <div id="mainTitleBox" class="mainTitle">
 	<h1>MY PAST PROJECTS</h1>
 	<a href="https://github.com/TJ-coding?tab=repositories">My repositories</a>
