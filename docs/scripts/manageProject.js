@@ -33,17 +33,16 @@ function dealWithData(dataString){
   }
 }
 
-function appendDrawLeaf(position,title,innerHtml){
+function appendDrawLeaf(position,title,innterHtml){
   var divId
   if(position=="right"){
-    divId="rightBranch";
+    divId="rightBranch"
   }else{
-    divId="leftBranch";
+    divId="leftBranch"
   }
-  alert(position+title+innerHtml);
-  alert(document.getElementById(divId))
   //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
+<<<<<<< HEAD
   document.getElementById(divId).innterHtml+="\
   <div id='projectLeaf'>\
     <h2 id='projectLeafTitle'>"+title+"</h2>\
@@ -52,6 +51,16 @@ function appendDrawLeaf(position,title,innerHtml){
   <div id='projectLeafSpace+' >\
   </div>\
   ";
+=======
+  document.getElementById(divId).innterHtml+=`
+  <div id="projectLeaf">
+    <h2 id="projectLeafTitle">`+title+`</h2>
+    <p>`+innterHtml+`</p>
+  </div>
+  <div id="projectLeafSpace" >
+  </div>
+  `;
+>>>>>>> parent of 71a547a... Added more alert functions for debuging
 }
 //call flow
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
