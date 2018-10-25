@@ -41,14 +41,14 @@ function appendDrawLeaf(position,title,innerHtml){
   alert(document.getElementById(divId))
   //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
-  document.getElementById(divId).innterHtml+=`
-  <div id="projectLeaf">
-    <h2 id="projectLeafTitle">`+title+`</h2>
-    <p>`+innerHtml+`</p>
-  </div>
-  <div id="projectLeafSpace" >
-  </div>
-  `;
+  document.getElementById(divId).innterHtml+="\
+  <div id='projectLeaf'>\
+    <h2 id='projectLeafTitle'>"+title+"</h2>\
+    <p>"+innerHtml+"</p>\
+  </div>\
+  <div id='projectLeafSpace+' >\
+  </div>\
+  ";
 }
 //call flow
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
