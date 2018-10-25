@@ -22,8 +22,11 @@ function dealWithData(dataString){
     }else{
       renderPosition="left";
     }
+<<<<<<< HEAD
     //debugging
     alert(renderPosition+ dataObject[i]["Title"]+ dataObject[i]["InnerText"])
+=======
+>>>>>>> parent of 577e77f... Added alert for debugging
     //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
     appendDrawLeaf(renderPosition, dataObject[i]["Title"], dataObject[i]["InnerText"]);
