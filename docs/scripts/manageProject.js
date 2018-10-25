@@ -13,7 +13,6 @@ function loadDoc() {
 }
 
 function dealWithData(dataString){
-	alert(dataString);
 	var dataObject=JSON.parse(dataString)["projectDatabase"];
   var numberOfProjects=dataObject.length;
   var renderPosition
@@ -31,8 +30,8 @@ function dealWithData(dataString){
 
 function appendDrawLeaf(position,title,innterHtml){
   var divId
-  if(renderPosition=="right"){
-    divId="leftBranch"
+  if(position=="right"){
+    divId="rightBranch"
   }else{
     divId="leftBranch"
   }
