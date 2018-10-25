@@ -22,11 +22,6 @@ function dealWithData(dataString){
     }else{
       renderPosition="left";
     }
-<<<<<<< HEAD
-    //debugging
-    alert(renderPosition+ dataObject[i]["Title"]+ dataObject[i]["InnerText"])
-=======
->>>>>>> parent of 577e77f... Added alert for debugging
     //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
     appendDrawLeaf(renderPosition, dataObject[i]["Title"], dataObject[i]["InnerText"]);
@@ -42,35 +37,14 @@ function appendDrawLeaf(position,title,innterHtml){
   }
   //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
-<<<<<<< HEAD
-<<<<<<< HEAD
-  document.getElementById(divId).innterHtml+="\
-  <div id='projectLeaf'>\
-    <h2 id='projectLeafTitle'>"+title+"</h2>\
-    <p>"+innerHtml+"</p>\
-  </div>\
-  <div id='projectLeafSpace+' >\
-  </div>\
-  ";
-=======
-  document.getElementById(divId).innterHtml+=`
-  <div id="projectLeaf">
-    <h2 id="projectLeafTitle">`+title+`</h2>
-    <p>`+innterHtml+`</p>
-=======
   document.getElementById(divId).innterHtml+=`
   <div id="projectLeaf">
     <h2 id="projectLeafTitle">`+title+`</h2>
     <p>`+innerHtml+`</p>
->>>>>>> parent of 65899d6... re wrote multi line string from ` to "\
   </div>
   <div id="projectLeafSpace" >
   </div>
   `;
-<<<<<<< HEAD
->>>>>>> parent of 71a547a... Added more alert functions for debuging
-=======
->>>>>>> parent of 65899d6... re wrote multi line string from ` to "\
 }
 //call flow
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
