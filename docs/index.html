@@ -1,3 +1,38 @@
 <html>
-<a src="https://github.com/TJ-coding?tab=repositories">My repositories</a>
+<head>
+	<link rel="stylesheet" type="text/css" href="style/mainStyleSheet.css">
+	<!---Importing fonts-->
+<link href="https://fonts.googleapis.com/css?family=Bungee|Teko" rel="stylesheet">
+<!--Scripts-->
+<script type="text/javascript">
+	function adjustSize(){
+		var windowHeight=window.innerHeight;
+		var titleBoxHeight = document.getElementById('mainTitleBox').clientHeight;
+		document.getElementById('verticleLineSVGBox').setAttribute("height", windowHeight-titleBoxHeight - 64);
+	}
+</script>
+</head>
+<body onload="adjustSize();" onresize="adjustSize();">
+<div id="mainTitleBox" class="mainTitle">
+	<h1>MY PAST PROJECTS</h1>
+	<a href="https://github.com/TJ-coding?tab=repositories">My repositories</a>
+	<hr>
+	<br>
+</div>
+
+<div id="svgContainer">
+<svg id="verticleLineSVGBox" viewBox="0 0 100 100">
+  <line id="verticleLine" x1="50" y1="0" x2="50" y2="100"></line>
+</svg>
+</div>
+
+<div style="width: 90vw">
+<div class="branch" id="leftBranch">
+	First DIV
+</div>
+<div class="branch" id="rightBranch">
+	Second DIV
+</div>
+</div>
+</body>
 </html>

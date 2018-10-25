@@ -1,0 +1,60 @@
+:root {
+  --bgC: #bde1e9;
+  --bigTitleText:#524f81;
+  --mainTitleHeight:4em;
+}
+
+.mainTitle{
+	text-align:center;
+	text-decoration: none;
+	padding: 0px;
+}
+.mainTitle div{
+	padding: 0px;
+	margin: 0px;
+	height: var(--mainTitleHeight);
+}
+.mainTitle h1{
+	color: var(--bigTitleText);
+	margin: 0;
+	line-height: 1.3em;
+	font-family: 'Bungee', cursive;
+	font-weight: 900;
+}
+.mainTitle a{
+	text-decoration: none;
+	font-family: 'Bungee', cursive;
+}
+.mainTitle hr{
+	width: 5em;
+}
+body{
+	background-color: var(--bgC);
+}
+
+#svgContainer{
+	 position: relative;
+}
+#verticleLineSVGBox{
+	width: 100%;
+ position: absolute;
+
+}
+#verticleLine{
+	display: absolute;
+	  stroke: #555555; stroke-width:1
+}
+
+.branch{
+	width: 45%;
+}
+#leftBranch{
+	float:left;
+	color: red;
+	text-align:right;
+}
+#rightBranch{
+	float: right;
+	background-color: red;
+
+}
