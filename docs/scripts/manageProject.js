@@ -30,19 +30,21 @@ function dealWithData(dataString){
   }
 }
 
-function appendDrawLeaf(position,title,innterHtml){
+function appendDrawLeaf(position,title,innerHtml){
   var divId
   if(position=="right"){
-    divId="rightBranch"
+    divId="rightBranch";
   }else{
-    divId="leftBranch"
+    divId="leftBranch";
   }
+  alert(position+title+innerHtml);
+  alert(document.getElementById(divId))
   //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
   document.getElementById(divId).innterHtml+=`
   <div id="projectLeaf">
     <h2 id="projectLeafTitle">`+title+`</h2>
-    <p>`+innterHtml+`</p>
+    <p>`+innerHtml+`</p>
   </div>
   <div id="projectLeafSpace" >
   </div>
