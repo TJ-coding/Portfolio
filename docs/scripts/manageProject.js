@@ -23,10 +23,10 @@ function dealWithData(dataString){
       renderPosition="left";
     }
     //debugging
-    alert(renderPosition+ dataObject["Title"]+ dataObject["InnterText"])
+    alert(renderPosition+ dataObject[i]["Title"]+ dataObject[i]["InnerText"])
     //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
-    appendDrawLeaf(renderPosition, dataObject["Title"], dataObject["InnterText"]);
+    appendDrawLeaf(renderPosition, dataObject[i]["Title"], dataObject[i]["InnerText"]);
   }
 }
 
