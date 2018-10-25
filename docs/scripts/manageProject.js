@@ -22,6 +22,8 @@ function dealWithData(dataString){
     }else{
       renderPosition="left";
     }
+    //debugging
+    alert(renderPosition+ dataObject["Title"]+ dataObject["InnterText"])
     //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
     appendDrawLeaf(renderPosition, dataObject["Title"], dataObject["InnterText"]);
