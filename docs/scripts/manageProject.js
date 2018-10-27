@@ -1,5 +1,5 @@
 //ajaxing
-DataUrl="https://tj-coding.github.io/Portfolio/projectDatabase.html"
+DataUrl="https://github.com/TJ-coding/Portfolio/blob/master/docs/projectDatabase.txt?raw=True"
 
 function loadDoc() {
   var xhttp = new XMLHttpRequest();
