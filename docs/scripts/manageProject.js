@@ -24,27 +24,30 @@ function dealWithData(dataString){
     }
     //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
-    appendDrawLeaf(renderPosition, dataObject[i]["Title"], dataObject[i]["InnerText"]);
+    appendDrawLeaf(renderPosition, dataObject[i]["Title"], dataObject[i]["Description"],dataObject[i]["InnerHtml"],dataObject[i]["Icon"]);
   }
 }
 
-function appendDrawLeaf(position,title,innerHtml){
-  var divId
-  if(position=="right"){
-    divId="rightBranch"
-  }else{
-    divId="leftBranch"
-  }
+function appendDrawLeaf(position,title,description,innerHtml,icon){
   //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
-  document.getElementById(divId).innerHTML+=`
-  <div id="projectLeaf">
-    <h2 id="projectLeafTitle">`+title+`</h2>
-    <p>`+innerHtml+`</p>
-  </div>
-  <div id="projectLeafSpace" >
-  </div>
-  `;
+  document.getElementById("horizontalPageWrapper").innerHTML+=`
+        <div class="horiontalPageElement">
+          <div style="padding-left:10vw;padding-top: 25vh;">
+            <table class="mainTitle" id="titleTable">
+              <tr><td width=30%"><img src="resource/icons/`+icon+`"
+                height="70em"
+                width="70em"
+                style="transform: rotate(90deg);"></td>
+                <td width="70%"><h1>`+title+`</h1></td><tr>
+                  <tr><td colspan="2">
+                    <p>`+description+`
+                    </p>
+                  </td></tr>
+                </table>
+              </div>
+            </div>
+          </div>`
 }
 //call flow
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
