@@ -1,43 +1,69 @@
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="style/mainStyleSheet.css">
-	<script src="scripts/manageProject.js"></script>
+		<html>
+		<head>
+			<link rel="stylesheet" type="text/css" href="style/mainStyleSheet.css">
+			<script src="scripts/manageProject.js"></script>
 
-	<!---Importing fonts-->
-<link href="https://fonts.googleapis.com/css?family=Chakra+Petch|Teko" rel="stylesheet">
-<!--Scripts-->
-<script type="text/javascript">
-	function adjustSize(){
-		var windowHeight=window.innerHeight;
-		var titleBoxHeight = document.getElementById('mainTitleBox').clientHeight;
-		document.getElementById('verticleLineSVGBox').setAttribute("height", windowHeight-titleBoxHeight - 64);
-			}
-</script>
-</head>
-<body onload="adjustSize();makeLeaves()" onresize="adjustSize();">
+			<!---Importing fonts-->
+			<link href="https://fonts.googleapis.com/css?family=Chakra+Petch|Teko" rel="stylesheet">
+			<!--Scripts-->
+			<script type="text/javascript">
+				function adjustSize(){
+					var windowHeight=window.innerHeight;
+					var windowWidth=window.innerHeight;
+					var titleBoxHeight = document.getElementById('mainTitleBox').clientHeight;
+					document.getElementById('verticleLineSVGBox').setAttribute("height", windowHeight-titleBoxHeight - 64);
+					document.getElementById("horizontalPageWrapper").setAttribute("height",windowWidth);
+					document.getElementById("horizontalPageWrapper").setAttribute("height",windowHeight);
+					alert("hi");
+				}
+			</script>
+		</head>
+		<body onload="makeLeaves();//adjustSize();" onresize="">
+			<!--Horizontal Page-->
+			<div class="horizontalPage" id="horizontalPageWrapper" onload="adjustSize();">
+				<!--First page-->
+				<div class="horiontalPageElement">
+					<div style="padding-left:10vw;padding-top: 25vh;">
+						<table class="mainTitle" id="titleTable">
+							<tr><td width=30%"><img src="resource/Japan_road_sign_foward.svg"
+								height="70em"
+								width="70em"
+								style="transform: rotate(90deg);"></td>
+								<td width="70%"><h1>MY NOTEABLE PROJECTS</h1></td><tr>
+									<tr><td colspan="2">
+										<a href="https://github.com/TJ-coding?tab=repositories">Git-Repo</a><br>
+										<p>
+											I love cogin in python bra bra bra bra bra more text and text and textREPOSITORY
+										</p>
+									</td></tr>
+								</table>
+							</div>
+						</div>
+						<div class="horiontalPageElement" style="background-image:url('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');"></div>
+					</div>
+					<!--Verticle Tree-->
+					<div style="width: 100%; text-align: center;">
+						<div id="mainTitleBox" class="mainTitle">
+							<h1>MY PAST PROJECTS</h1>
+							<a href="https://github.com/TJ-coding?tab=repositories">REPOSITORY</a>
+							<hr>
+							<br>
+						</div>
+					</div>
 
-<div style="width: 100%; text-align: center;">
-<div id="mainTitleBox" class="mainTitle">
-	<h1>MY PAST PROJECTS</h1>
-	<a href="https://github.com/TJ-coding?tab=repositories">REPOSITORY</a>
-	<hr>
-	<br>
-</div>
-</div>
+					<div id="svgContainer">
+						<svg id="verticleLineSVGBox" viewBox="0 0 100 100">
+							<line id="verticleLine" x1="50" y1="0" x2="50" y2="100"></line>
+						</svg>
+					</div>
 
-<div id="svgContainer">
-<svg id="verticleLineSVGBox" viewBox="0 0 100 100">
-  <line id="verticleLine" x1="50" y1="0" x2="50" y2="100"></line>
-</svg>
-</div>
+					<div style="width: 100%">
+						<div class="branch" id="leftBranch">
+							<div id="projectLeafSpace"></div>
+						</div>
+						<div class="branch" id="rightBranch">
 
-<div style="width: 100%">
-<div class="branch" id="leftBranch">
-	<div id="projectLeafSpace"></div>
-</div>
-<div class="branch" id="rightBranch">
-
-</div>
-</div>
-</body>
-</html>
+						</div>
+					</div>
+				</body>
+				</html>

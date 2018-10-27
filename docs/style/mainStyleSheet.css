@@ -1,80 +1,108 @@
-:root {
-  --bgC: rgba(50, 51, 119, 0.5);
-  --bigTitleText:#524f81;
-  --mainTitleHeight:4em;
-}
+	:root {
+	  --bgC: rgba(50, 51, 119, 0.5);
+	  --bigTitleText:#524f81;
+	  --mainTitleHeight:4em;
+	}
 
-.mainTitle{
-	text-align:center;
-	text-decoration: none;
-	padding: 0px;
-}
-#mainTitleBox{
-	background-color: rgba(255,255,255,0.3);
-	width: 16em; 
-	display: inline-block;
-	margin-bottom: 1em;
-	border-top-right-radius: 80px;
-	border-top-left-radius: 80px;
-}
-.mainTitle div{
-	height: var(--mainTitleHeight);
-}
-.mainTitle h1{
-	color:rgb(69,73,78);
-	margin: 0;
-	line-height: 1.3em;
-	font-family: 'Chakra Petch', sans-serif;
-	font-weight: 900;
-}
-.mainTitle a{
-	text-decoration: none;
-	font-family: 'Teko', sans-serif;
-}
-.mainTitle hr{
-	width: 5em;
-	border-width: 1px;
-	border-color: rgba(50, 51, 119, 0.5);
-}
-body{
-	background-image: url("file:///D:/programming/xampp/htdocs/docs/resource/background.svg");
+	/*
+	horizontal page
+	*/
+	/*A nasty hack
+	rotating a normal vertical scrolling page by -90 deg
+	then rotate the elements by 90 deg
+	then make scrollbar transparant
+	*/
+	#horizontalPageWrapper{
+		height:100vw;
+		width: 100vh;
+		overflow-x: hidden;
+		overflow-y: auto;
+		/*rotate and translate the wraper to scroll horizontally*/
+	  	transform-origin: right top;
+		transform: rotate(-90deg) translateY(-100vh);
+	}
+	/*make scroll bar transparent*/
+	.horizontalPage::-webkit-scrollbar {
+	    width: 0px;
+	    background: transparent;
+	}
 
-    background-size:     cover;            
-    background-repeat:   no-repeat;
-    background-position: center center; 
-}
+	.horiontalPageElement{
+		height: 100%;
+		width: 100vw;
+	/*rotate child elements to make it up right*/
+	  transform: rotate(90deg) translateY(calc(100vw - 100vh));
+	}
+	/*Title related*/
+	.mainTitle{
+		text-align:left;
+		text-decoration: none;
+		/*margin-top: 30vh;
+		margin-left: 10vw*/
+	}
+	#titleTable{
+		width: 20em;
+	}
 
-#svgContainer{
-	 position: relative;
-}
-#verticleLineSVGBox{
-	width: 100%;
- position: absolute;
+	.mainTitle h1{
+		color:rgb(69,73,78);
+		margin: 0;
+		line-height: 1.3em;
+		font-family: 'Chakra Petch', sans-serif;
+		font-weight: 900;
+	}
+	.mainTitle a{
+		text-decoration: none;
+		font-family: 'Teko', sans-serif;
+	}
+	.mainTitle p{
+		color:#798488 ;
+		text-decoration: none;
+		font-family: 'Teko', sans-serif;
+	}
+	.mainTitle hr{
+		width: 5em;
+		border-width: 1px;
+		border-color: rgba(50, 51, 119, 0.5);
+	}
 
-}
-#verticleLine{
-	display: absolute;
-	  stroke: rgb(69,73,78); stroke-width:0.8
-}
+	body{
+	    padding: 0;
+	    margin: 0;
+	    overflow-x: hidden;
+	}
 
-.branch{
-	width: 50%;
-}
-#leftBranch{
-	float:left;
-	text-align:right;
-}
-#rightBranch{
-	float: right;
-}
+	#svgContainer{
+		 position: relative;
+	}
+	#verticleLineSVGBox{
+		width: 100%;
+	 position: absolute;
 
-#projectLeaf{
-	padding-left: 10%;
-	padding-right:10%;
-	background-color: rgba(255,255,255,0.3);
-	border-bottom: 3px solid rgb(69,73,78);;
-}
+	}
+	#verticleLine{
+		display: absolute;
+		  stroke: rgb(69,73,78); stroke-width:0.8
+	}
 
-#projectLeafSpace{
-	height: 20%;
-}
+	.branch{
+		width: 50%;
+	}
+	#leftBranch{
+		float:left;
+		text-align:right;
+	}
+	#rightBranch{
+		float: right;
+	}
+
+	#projectLeaf{
+		padding-left: 10%;
+		padding-right:10%;
+		background-color: rgba(255,255,255,0.3);
+		border-bottom: 3px solid rgb(69,73,78);;
+	}
+
+	#projectLeafSpace{
+		height: 20%;
+	}
