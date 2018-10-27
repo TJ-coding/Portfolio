@@ -41,8 +41,7 @@ function appendDrawLeaf(position,title,description,innerHtml,icon){
   <table class="mainTitle" id="titleTable">
   <tr><td width=30%"><img src="resource/icons/`+icon+`"
   height="70em"
-  width="70em"
-  style="transform: rotate(90deg);"></td>
+  width="70em"></td>
   <td width="70%"><h1>`+title+`</h1></td><tr>
   <tr><td colspan="2">
   <p>`+description+`
