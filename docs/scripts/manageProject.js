@@ -1,11 +1,9 @@
 //ajaxing
-DataUrl="https://tj-coding.github.io/Portfolio/projectDatabase.html"
-
-function loadDoc() {
+function loadDoc(DataUrl,responseFunction) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     dealWithData(this.responseText);
+     responseFunction(this.responseText);
    }
  };
  xhttp.open("GET", DataUrl, true);
@@ -15,17 +13,46 @@ function loadDoc() {
 function dealWithData(dataString){
   var dataObject=JSON.parse(dataString)["projectDatabase"];
   var numberOfProjects=dataObject.length;
-  var renderPosition
   for (var i = 0; i < numberOfProjects; i++) {
-    if(i%2==0){
-      renderPosition="right";
-    }else{
-      renderPosition="left";
-    }
     //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
-    appendDrawLeaf(renderPosition, dataObject[i]["Title"], dataObject[i]["Description"],dataObject[i]["InnerHtml"],dataObject[i]["Icon"]);
+
+    var description=dataObject[i]["Description"];
+    var innerHTML=dataObject[i]["InnerHtml"];
+    if(description.substring(0,16)=="!!!FetchData!!!:" && innerHTML.substring(0,16)=="!!!FetchData!!!:"){
+    //fetch both description and innerHTML
+    var responseFunction=function(responseText){
+      //after fetching description
+      var secondResponseFunction=function(secondResponseText){
+        //after fetching  innerHTML
+        appendDrawLeaf(renderPosition, dataObject[i]["Title"], responseText,secondResponseText,dataObject[i]["Icon"]);
+      }
+      loadDoc(description.substring(16,description.length),secondResponseFunction)
+    }
+    loadDoc(innerHTML.substring(16,innerHTML.length),responseFunction)
+  }else if(description.substring(0,16)=="!!!FetchData!!!:"){
+    //fetch description
+    var responseFunction=function(responseText){
+      //after fetching description
+      appendDrawLeaf(renderPosition, dataObject[i]["Title"], responseText,innerHTML,dataObject[i]["Icon"]);
+    }
+    loadDoc(description.substring(16,description.length),responseFunction)
+
+
+  }else if(innerHTML.substring(0,16)=="!!!FetchData!!!:"){
+    //fetch innerHTML
+    var responseFunction=function(responseText){
+      //after fetching innerHTML
+      appendDrawLeaf(renderPosition, dataObject[i]["Title"], description,responseText,dataObject[i]["Icon"]);
+
+    }
+        loadDoc(innerHTML.substring(16,innerHTML.length),responseFunction)
+
+  }else{
+    //don't fetch anything
+    appendDrawLeaf(renderPosition, dataObject[i]["Title"], description,innerHTML,dataObject[i]["Icon"]);
   }
+}
 }
 
 function appendDrawLeaf(position,title,description,innerHtml,icon){
@@ -64,5 +91,8 @@ function appendDrawLeaf(position,title,description,innerHtml,icon){
 //call flow
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
 function makeLeaves(){
-  loadDoc()
+  var DataUrl="https://tj-coding.github.io/Portfolio/projectDatabas/projectDatabase.html"
+
+  //sending function dealWithData as response function
+  loadDoc(DataUrl,dealWithData)
 }
