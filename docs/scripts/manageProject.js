@@ -91,8 +91,7 @@ function appendDrawLeaf(position,title,description,innerHtml,icon){
 //call flow
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
 function makeLeaves(){
-  var DataUrl="https://tj-coding.github.io/Portfolio/projectDatabas/projectDatabase.html"
-
+  var DataUrl="https://tj-coding.github.io/Portfolio/projectDatabase/projectDatabase.html"
   //sending function dealWithData as response function
   loadDoc(DataUrl,dealWithData)
 }
