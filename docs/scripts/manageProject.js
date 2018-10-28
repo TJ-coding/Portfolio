@@ -1,16 +1,18 @@
 //ajaxing
-function loadDoc(DataUrl,responseFunction) {
+//accept url to sendd ajax to, response function that is called on ready and array argument that is attached to the response function
+function loadDoc(DataUrl,responseFunction,arrayArg) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     responseFunction(this.responseText);
+     responseFunction(this.responseText,arrayArg);
    }
  };
  xhttp.open("GET", DataUrl, true);
  xhttp.send();
 }
 
-function dealWithData(dataString){
+function dealWithData(dataString,arrayArg){
+  arrayArg="" //this method accept no array argument
   var dataObject=JSON.parse(dataString)["projectDatabase"];
   var numberOfProjects=dataObject.length;
   for (var i = 0; i < numberOfProjects; i++) {
@@ -19,34 +21,43 @@ function dealWithData(dataString){
 
     var description=dataObject[i]["Description"];
     var innerHTML=dataObject[i]["InnerHtml"];
+    var responseArg = {"title":dataObject[i]["Title"],"description":dataObject[i]["Description"],"innerHTML":dataObject[i]["innerHTML"],"icon":dataObject[i]["icon"]};
     if(description.substring(0,16)=="!!!FetchData!!!:" && innerHTML.substring(0,16)=="!!!FetchData!!!:"){
     //fetch both description and innerHTML
-    var responseFunction=function(responseText){
+    //appending description url to array
+    responseArg.descriptionLocation=description.substring(16,description.length);
+    responseArg.innerHTMLLocation=innerHTML.substring(16,innerHTML.length);
+    var responseFunction=function(responseText,arrayArg){
       //after fetching description
-      var secondResponseFunction=function(secondResponseText){
+      arrayArg.description=responseText;
+      var secondResponseFunction=function(secondResponseText,arrayArg2){
         //after fetching  innerHTML
-        appendDrawLeaf(dataObject[i]["Title"], responseText,secondResponseText,dataObject[i]["Icon"]);
+        arrayArg2.innerHTML=secondResponseText;
+        appendDrawLeaf(arrayArg2["title"], arrayArg2["description"],arrayArg2["innerHTML"],arrayArg2["Icon"]);
       }
-      loadDoc(description.substring(16,description.length),secondResponseFunction)
+      loadDoc(arrayArg2["innerHTMLLocation"],secondResponseFunction,arrayArg)
     }
-    loadDoc(innerHTML.substring(16,innerHTML.length),responseFunction)
+    loadDoc(responseArg["descriptionLocation"],responseFunction,responseArg)
   }else if(description.substring(0,16)=="!!!FetchData!!!:"){
     //fetch description
-    var responseFunction=function(responseText){
+    responseArg.descriptionLocation=description.substring(16,description.length);
+    var responseFunction=function(responseText,arrayArg){
       //after fetching description
-      appendDrawLeaf(dataObject[i]["Title"], responseText,innerHTML,dataObject[i]["Icon"]);
+      arrayArg.description=responseText;
+      appendDrawLeaf(arrayArg["title"], arrayArg["description"],arrayArg["innerHTML"],arrayArg["Icon"]);
     }
-    loadDoc(description.substring(16,description.length),responseFunction)
+    loadDoc(responseArg["descriptionLocation"],responseArg)
 
 
   }else if(innerHTML.substring(0,16)=="!!!FetchData!!!:"){
     //fetch innerHTML
+    responseArg.innerHTMLLocation=innerHTML.substring(16,innerHTML.length);
     var responseFunction=function(responseText){
       //after fetching innerHTML
-      appendDrawLeaf(dataObject[i]["Title"], description,responseText,dataObject[i]["Icon"]);
-
+      arrayArg.innerHTML=responseText;
+      appendDrawLeaf(arrayArg["title"], arrayArg["description"],arrayArg["innerHTML"],arrayArg["Icon"]);
     }
-        loadDoc(innerHTML.substring(16,innerHTML.length),responseFunction)
+        loadDoc(arrayArg["innerHTMLLocation"],responseFunction,responseArg)
 
   }else{
     //don't fetch anything
@@ -93,5 +104,5 @@ function appendDrawLeaf(title,description,innerHtml,icon){
 function makeLeaves(){
   var DataUrl="https://tj-coding.github.io/Portfolio/projectDatabase/projectDatabase.html"
   //sending function dealWithData as response function
-  loadDoc(DataUrl,dealWithData)
+  loadDoc(DataUrl,dealWithData,[])
 }
