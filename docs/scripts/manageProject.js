@@ -50,12 +50,12 @@ function dealWithData(dataString){
 
   }else{
     //don't fetch anything
-    appendDrawLeaf(renderPosition, dataObject[i]["Title"], description,innerHTML,dataObject[i]["Icon"]);
+    appendDrawLeaf(dataObject[i]["Title"], description,innerHTML,dataObject[i]["Icon"]);
   }
 }
 }
 
-function appendDrawLeaf(position,title,description,innerHtml,icon){
+function appendDrawLeaf(title,description,innerHtml,icon){
   //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
   document.getElementById("horizontalPageWrapper").innerHTML+=`
