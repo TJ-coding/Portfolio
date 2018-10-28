@@ -25,7 +25,7 @@ function dealWithData(dataString){
       //after fetching description
       var secondResponseFunction=function(secondResponseText){
         //after fetching  innerHTML
-        appendDrawLeaf(renderPosition, dataObject[i]["Title"], responseText,secondResponseText,dataObject[i]["Icon"]);
+        appendDrawLeaf(dataObject[i]["Title"], responseText,secondResponseText,dataObject[i]["Icon"]);
       }
       loadDoc(description.substring(16,description.length),secondResponseFunction)
     }
@@ -34,7 +34,7 @@ function dealWithData(dataString){
     //fetch description
     var responseFunction=function(responseText){
       //after fetching description
-      appendDrawLeaf(renderPosition, dataObject[i]["Title"], responseText,innerHTML,dataObject[i]["Icon"]);
+      appendDrawLeaf(dataObject[i]["Title"], responseText,innerHTML,dataObject[i]["Icon"]);
     }
     loadDoc(description.substring(16,description.length),responseFunction)
 
@@ -43,7 +43,7 @@ function dealWithData(dataString){
     //fetch innerHTML
     var responseFunction=function(responseText){
       //after fetching innerHTML
-      appendDrawLeaf(renderPosition, dataObject[i]["Title"], description,responseText,dataObject[i]["Icon"]);
+      appendDrawLeaf(dataObject[i]["Title"], description,responseText,dataObject[i]["Icon"]);
 
     }
         loadDoc(innerHTML.substring(16,innerHTML.length),responseFunction)
