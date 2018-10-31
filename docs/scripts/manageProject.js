@@ -4,10 +4,7 @@ function loadDoc(DataUrl,responseFunction,arrayArg) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-
-      funcString=JSON.stringify(responseFunction(this.responseText,arrayArg));
-          // alert(funcString)
-        }
+      responseFunction(this.responseText,arrayArg);
       };
       xhttp.open("GET", DataUrl, true);
       xhttp.send();
@@ -87,7 +84,6 @@ function fetchDescription(pageData){
     //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
     var pageData = {"title":dataBase[i]["Title"],"description":dataBase[i]["Description"],"innerHTML":dataBase[i]["InnerHtml"],"icon":dataBase[i]["Icon"],"renderOrder":i};
-    alert(dataBase[i]["Title"]);
     var whichDataToGet = findWhichDataToFetch(pageData);
     //FETCH DESCRIPTION AND INNERHTML
     if(whichDataToGet["getDescription"] && whichDataToGet["getInnerHTML"]){
