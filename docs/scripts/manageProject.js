@@ -4,70 +4,124 @@ function loadDoc(DataUrl,responseFunction,arrayArg) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-     responseFunction(this.responseText,arrayArg);
-   }
- };
- xhttp.open("GET", DataUrl, true);
- xhttp.send();
+
+      funcString=JSON.stringify(responseFunction(this.responseText,arrayArg));
+          // alert(funcString)
+        }
+      };
+      xhttp.open("GET", DataUrl, true);
+      xhttp.send();
+    }
+
+//extract url from format of "!!!FetchData!!!:URL"
+function extractURL(dataString){
+  lenToCut="!!!FetchData!!!:".length;
+  var url= dataString.substring(lenToCut,dataString.length);
+  return url
 }
 
-function dealWithData(dataString,arrayArg){
+//CALLED BY DEAL WITH DATA
+function findWhichDataToFetch(pageData){
+  var description=pageData["description"];
+  var innerHTML=pageData["innerHTML"];
+  var whichDataToGet={"getDescription":false, "getInnerHTML":false}
+  whichDataToGet["getDescription"]=description.substring(0,16)=="!!!FetchData!!!:";
+  whichDataToGet["getInnerHTML"]=innerHTML.substring(0,16)=="!!!FetchData!!!:";
+  return whichDataToGet
+}
+
+//fetch both description and innerHTML from URL then render the page
+function fetchDescriptInnerHTML(pageData){
+    //extracting URL to fetch data from
+    pageData.descriptionLocation=extractURL(pageData["description"])
+    pageData.innerHTMLLocation=extractURL(pageData["innerHTML"])
+    //response function called after fetching description data
+    var responseFunction=function(responseText,arrayArg){
+      //responseText is the descriptionData
+      arrayArg.description=responseText;
+      //response function called after fetching innerHTML data
+      var secondResponseFunction=function(secondResponseText,arrayArg2){
+        //secondResponseText is the innerHTML data
+        arrayArg2.innerHTML=secondResponseText;
+        //send the paramters for page and render it
+      renderPageObject.addPageToList(arrayArg2);
+      }
+      //fetch InnerHTML
+      loadDoc(arrayArg2["innerHTMLLocation"],secondResponseFunction,arrayArg)
+    }
+    //fetch Description
+    loadDoc(pageData["descriptionLocation"],responseFunction,pageData)
+  }
+//fetch both description  from URL then render the page
+function fetchDescription(pageData){
+   //fetch description
+   pageData.descriptionLocation=extractURL(pageData["description"]);
+   var responseFunction=function(responseText,arrayArg){
+      //after fetching description
+      arrayArg.description=responseText;
+      renderPageObject.addPageToList(arrayArg);
+    }
+    loadDoc(pageData["descriptionLocation"],responseFunction,pageData)
+
+  }
+
+  function fetchInnerHTML(pageData){
+  //fetch innerHTML
+  pageData.innerHTMLLocation=extractURL(pageData["innerHTML"]);
+  var responseFunction=function(responseText){
+      //after fetching innerHTML
+      arrayArg.innerHTML=responseText;
+      renderPageObject.addPageToList(arrayArg);
+    }
+    loadDoc(pageData["innerHTMLLocation"],responseFunction,pageData)
+  }
+
+  //called by the main response function
+  function dealWithDatabase(dataBaseString,arrayArg){
   arrayArg="" //this method accept no array argument
-  var dataObject=JSON.parse(dataString)["projectDatabase"];
-  var numberOfProjects=dataObject.length;
+  var dataBase=JSON.parse(dataBaseString)["projectDatabase"];
+  var numberOfProjects=dataBase.length;
+  //globalClass - setting up number of pageData to expect
+  renderPageObject.numberOfPages=numberOfProjects;
   for (var i = 0; i < numberOfProjects; i++) {
     //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
-
-    var description=dataObject[i]["Description"];
-    var innerHTML=dataObject[i]["InnerHtml"];
-    var responseArg = {"title":dataObject[i]["Title"],"description":dataObject[i]["Description"],"innerHTML":dataObject[i]["innerHTML"],"icon":dataObject[i]["icon"]};
-    if(description.substring(0,16)=="!!!FetchData!!!:" && innerHTML.substring(0,16)=="!!!FetchData!!!:"){
-    //fetch both description and innerHTML
-    //appending description url to array
-    responseArg.descriptionLocation=description.substring(16,description.length);
-    responseArg.innerHTMLLocation=innerHTML.substring(16,innerHTML.length);
-    var responseFunction=function(responseText,arrayArg){
-      //after fetching description
-      arrayArg.description=responseText;
-      var secondResponseFunction=function(secondResponseText,arrayArg2){
-        //after fetching  innerHTML
-        arrayArg2.innerHTML=secondResponseText;
-        appendDrawLeaf(arrayArg2["title"], arrayArg2["description"],arrayArg2["innerHTML"],arrayArg2["Icon"]);
-      }
-      loadDoc(arrayArg2["innerHTMLLocation"],secondResponseFunction,arrayArg)
-    }
-    loadDoc(responseArg["descriptionLocation"],responseFunction,responseArg)
-  }else if(description.substring(0,16)=="!!!FetchData!!!:"){
-    //fetch description
-    responseArg.descriptionLocation=description.substring(16,description.length);
-    var responseFunction=function(responseText,arrayArg){
-      //after fetching description
-      arrayArg.description=responseText;
-      appendDrawLeaf(arrayArg["title"], arrayArg["description"],arrayArg["innerHTML"],arrayArg["Icon"]);
-    }
-    loadDoc(responseArg["descriptionLocation"],responseArg)
-
-
-  }else if(innerHTML.substring(0,16)=="!!!FetchData!!!:"){
-    //fetch innerHTML
-    responseArg.innerHTMLLocation=innerHTML.substring(16,innerHTML.length);
-    var responseFunction=function(responseText){
-      //after fetching innerHTML
-      arrayArg.innerHTML=responseText;
-      appendDrawLeaf(arrayArg["title"], arrayArg["description"],arrayArg["innerHTML"],arrayArg["Icon"]);
-    }
-        loadDoc(arrayArg["innerHTMLLocation"],responseFunction,responseArg)
-
-  }else{
+    var pageData = {"title":dataBase[i]["Title"],"description":dataBase[i]["Description"],"innerHTML":dataBase[i]["InnerHtml"],"icon":dataBase[i]["Icon"],"renderOrder":i};
+    alert(dataBase[i]["Title"]);
+    var whichDataToGet = findWhichDataToFetch(pageData);
+    //FETCH DESCRIPTION AND INNERHTML
+    if(whichDataToGet["getDescription"] && whichDataToGet["getInnerHTML"]){
+      fetchDescriptInnerHTML(pageData);
+  //FETCH DESCRIPTION ONLY
+}else if(whichDataToGet["getDescription"]){
+  fetchDescription(pageData)
+  //FETCH INNERHTML ONLY
+}else if(whichDataToGet["getInnerHTML"]){
+  fetchInnerHTML(pageData)
+  //FETCH NOTHING
+}else{
     //don't fetch anything
-    appendDrawLeaf(dataObject[i]["Title"], description,innerHTML,dataObject[i]["Icon"]);
+    renderPageObject.addPageToList(pageData);
   }
 }
 }
 
-function appendDrawLeaf(title,description,innerHtml,icon){
-  //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+renderPageObject = {
+  pageDataList: [],
+  numberOfPages:0,
+  //maps render order with pageDatList index
+  renderOrder:{},
+  renderPages () {
+    for (var i = 0; i<this.numberOfPages ; i++) {
+      indexToRender=this.renderOrder[i];
+      thisPageData=this.pageDataList[indexToRender];
+      this.appendPage(thisPageData["title"],thisPageData["description"],thisPageData["innerHTML"],thisPageData["icon"])
+    }
+  },
+
+  //apend html to the horzontalPAgeWrapper
+  appendPage(title,description,innerHtml,icon){
+ //BE VERY CAREFUL LET NO ONE EDIT THE DATA BASE HTML!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   //IT IS VERY XSS ABLE AND IT IS INTEDED FOR IT TO BE POSSIBLE TO ALLOW FLEXIBILITY
   document.getElementById("horizontalPageWrapper").innerHTML+=`
   <div class="horiontalPageElement">
@@ -98,11 +152,25 @@ function appendDrawLeaf(title,description,innerHtml,icon){
   </div>
 
   `
+  },
+  //add page data to attribute
+  addPageToList(pageData){
+    this.pageDataList.push(pageData);
+    //set up render order table, to show which pageData should be rendered at which order
+    var order=pageData["renderOrder"];
+    this.renderOrder[order]=this.pageDataList.length-1;
+    //check if the list of data have reached the expected number, when so start renderig
+    if(this.pageDataList.length==this.numberOfPages){
+      this.renderPages();
+    }
+  }
 }
+
+
 //call flow
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
 function makeLeaves(){
   var DataUrl="https://tj-coding.github.io/Portfolio/projectDatabase/projectDatabase.html"
   //sending function dealWithData as response function
-  loadDoc(DataUrl,dealWithData,[])
+  loadDoc(DataUrl,dealWithDatabase,[])
 }
