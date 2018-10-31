@@ -5,11 +5,11 @@ function loadDoc(DataUrl,responseFunction,arrayArg) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       responseFunction(this.responseText,arrayArg);
+        }
       };
       xhttp.open("GET", DataUrl, true);
       xhttp.send();
     }
-}
 
 //extract url from format of "!!!FetchData!!!:URL"
 function extractURL(dataString){
