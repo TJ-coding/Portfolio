@@ -44,7 +44,7 @@ function fetchDescriptInnerHTML(pageData){
       renderPageObject.addPageToList(arrayArg2);
       }
       //fetch InnerHTML
-      loadDoc(arrayArg2["innerHTMLLocation"],secondResponseFunction,arrayArg)
+      loadDoc(arrayArg["innerHTMLLocation"],secondResponseFunction,arrayArg)
     }
     //fetch Description
     loadDoc(pageData["descriptionLocation"],responseFunction,pageData)
