@@ -9,6 +9,7 @@ function loadDoc(DataUrl,responseFunction,arrayArg) {
       xhttp.open("GET", DataUrl, true);
       xhttp.send();
     }
+}
 
 //extract url from format of "!!!FetchData!!!:URL"
 function extractURL(dataString){
