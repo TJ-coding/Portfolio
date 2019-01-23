@@ -182,7 +182,7 @@ renderPageObject = {
 //call flow
 //makeLeaves->loadDoc->dealWithData->appendDrawLeaf
 function makeCarouselPages(){
-  var DataUrl="http://localhost/docs/projectDatabase/projectDatabase.html"
+  var DataUrl="https://tj-coding.github.io/Portfolio/projectDatabase/projectDatabase.html"
   //sending function dealWithData as response function
   loadDoc(DataUrl,dealWithDatabase,[])
 }
