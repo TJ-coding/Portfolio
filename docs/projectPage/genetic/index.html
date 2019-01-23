@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Genetic project</title>
+	<link rel="icon" href="../../resource/icons/EM.png">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	<!--mathjax For matehmatical equations-->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+	<!--Importing css-->
+	<link rel="stylesheet" type="text/css" href="../../style/projectPage.css">
+	<link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+</head>
+<!--Using scrollspy plugin on body-->
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="#">Genetic Algorithm Project</a>
+		        <div class="collapse navbar-collapse" id="navbarResponsive">
+
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#context">Context</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#introduction">Introduction</a>
+			</li>
+			
+			<li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#algorithms">Algorithms</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#uml">UML Diagrams</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link js-scroll-trigger" href="#lessons">Lessons Learned</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#about">Home</a>
+			</li>
+		</ul>
+	</div>
+	</nav>
+	<div class="container">
+		<section id="top" class="row">
+				<h1 class="col-12">Genetic Algorithm Project</h1>
+				<p class="col-12">As part of my course project, I wrote a program that allow users to build an environment with obstacles and defined path, then <strong class="text-primary">train </strong>the <strong class="text-primary">genetic algorithm</strong> to <strong class="text-primary">control</strong> a <strong class="text-primary">charged particle</strong> around a path. The genetic algorithm can control the charged particle by varying the potential difference across charged plates. In this document I will be highlighting interesting components of the projects and things that I have learnt during the project. If you are only interested in the general overview of what is involved in the project I will recormend only reading the&nbsp;<a href="#algorithms">Algorighm</a>&nbsp;and&nbsp;<a href="#lessons">Lessons Learned</a>&nbsp;sections.</p> 
+		</section>
+		<section id="context" class="row">
+				<h2 class="col-12">Context</h2>
+				<p class="col-12">The requirement of the project was to write a python program with a <strong class="text-primary">graphical user interface</strong> that encorporate a <strong class="text-primary">physical concept</strong> that was tought in the term. <strong class="text-primary">Three weeks</strong> were given to carry out the project whils other courses that ran in parallel were held as normal. This meant that time constraint was tight for the project and time management was key aspect of the project.</p>
+		</section>
+		<section id="introduction" class="row">
+				<h2 class="col-12">Introduction</h2><br><br>
+				<div class="col-12">
+				<h3>Controlling a charged particle</h3><br>
+				<p>
+        		Electric and magnetic force that is eperienced by a particle can be given by the following equation.
+        		&#9312;
+				<math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi mathvariant="normal">F</mi><mo>&#x21C0;</mo></mover><mo>=</mo><mi mathvariant="normal">q</mi><mo>&#xD7;</mo><mo>(</mo><mover><mi mathvariant="normal">E</mi><mo>&#x21C0;</mo></mover><mo>+</mo><mover><mi mathvariant="normal">V</mi><mo>&#x21C0;</mo></mover><mo>&#xD7;</mo><mover><mi mathvariant="normal">B</mi><mo>&#x21C0;</mo></mover><mo>)</mo></math>
+				Where
+				<ul>
+					<li>
+						<math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi mathvariant="normal">F</mi><mo>&#x2192;</mo></mover><mspace linebreak="newline"/></math> is force experienced by the charged particle
+					</li>
+					<li>
+						<math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">q</mi></math> is the charge of the particle
+					</li>
+					<li><math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi mathvariant="normal">E</mi><mo>&#x2192;</mo></mover><mspace linebreak="newline"/></math> is the Electric Field at the point where the particle exist</li>
+					<li><math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi mathvariant="normal">V</mi><mo>&#x2192;</mo></mover><mspace linebreak="newline"/></math> is the Velocity of the particle</li>
+					<li><math xmlns="http://www.w3.org/1998/Math/MathML"><mover><mi mathvariant="normal">B</mi><mo>&#x2192;</mo></mover><mspace linebreak="newline"/></math> is the Magnetic Field at the point where the particle exist</li>
+				</ul>
+				As can be seen from equation &#9312;, by varying E field at the point of the particle, Force can be applied to the charged particle in the drsired direction with desired magnitude.
+				</p>
+        		</div>
+				<h3 class="col-12">Using the program</h3><br>
+		</section>
+		<section id="algorithms" class="row">
+			<h2 class="col-12">Implementation of algorithms</h2><br><br>
+			<h3 class="col-12">Genetic algorithm</h3><br>
+			<h3 class="col-12">Collision detection algorithm</h3><br>
+			<h3 class="col-12">Implicit and explicit iterative methods</h3><br>
+		</section>
+		<section id="uml">
+			<h2 class="row">UML Diagrams</h2>
+		</section>
+		<section id="lessons">
+			<h2 class="row">Lessons learned</h2>
+			<p class="row">
+				<h3>Technical tips</h3>
+				<ul>
+					<li>Only use tkinter for tiny projects.
+						<ul>
+							<li>Biggest advantage of tkinter is that tkinter is preinstalled in most python enviroments.</li>
+							<li>Many libraries such as MayaVi do not have backend support for tkinter. I would recormend Kivy or PyQT for project that require modern libraries since they would have higher chance of being supported by other libraries.</li>
+						</ul>
+					</li>
+					<li>Never use matplotlib for real time three dimensional rendering
+						<ul>
+							<li>matplotlib is a library that was initially designed for two dimensional static plots</li>
+							<li>Even though animations and three dimentiaonl plots are supported, the library was not initially designed with these features in mind. </li>
+							<li>As a result, animating three dimensional animation can be computationally costly and some features are not well supported.</li>
+							<li>Use MayaVi for this kind of application since MayaVi was desgined with real time three dimensional plotting in mind.</li>
+						</ul>
+					</li>
+
+				</ul>
+				<h3>Abstract tips</h3>
+			</p>
+		</section>
+
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+</body>
+</html>

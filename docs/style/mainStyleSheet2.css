@@ -1,0 +1,137 @@
+	:root {
+		--bgC: rgba(50, 51, 119, 0.5);
+		--bigTitleText:#524f81;
+		--mainTitleHeight:4em;
+	}
+
+/*responsive css wrapper*/
+@media (max-width: 800px) {
+  /* CSS that should be displayed if width is equal to or less than 800px goes here */
+}
+
+	/*
+	horizontal page
+	*/
+	/*A nasty hack
+	rotating a normal vertical scrolling page by -90 deg
+	then rotate the elements by 90 deg
+	then make scrollbar transparant
+	*/
+	#horizontalPageWrapper{
+		height:100vw;
+		width: 100vh;
+		overflow-x: hidden;
+		overflow-y: auto;
+		/*rotate and translate the wraper to scroll horizontally*/
+		transform-origin: right top;
+		transform: rotate(-90deg) translateY(-100vh);
+	}
+	/*make scroll bar transparent*/
+	.horizontalPage::-webkit-scrollbar {
+		width: 0px;
+		background: transparent;
+	}
+
+	.horiontalPageElement{
+		height: 100%;
+		width: 100vw;
+		/*rotate child elements to make it up right*/
+		transform: rotate(90deg) translateY(calc(100vw - 100vh));
+	}
+	/*Title related*/
+	.projectSlide{
+		text-align:left;
+		text-decoration: none;
+		/*margin-top: 30vh;
+		margin-left: 10vw*/
+	}
+	#titleTable{
+		width: 20em;
+	}
+	.col{
+		text-align: center;
+	}
+
+	.projectSlide h1{
+		color:rgb(69,73,78);
+		margin: 0;
+		line-height: 1.3em;
+		font-family: 'Orbitron', sans-serif;
+		font-weight: 900;
+	}
+	.projectSlide a{
+		text-decoration: none;
+		font-family: 'Teko', sans-serif;
+		text-align: center;
+
+	}
+	.projectSlide p{
+		padding-top: 1em;
+		color:#798488 ;
+			font-family: 'Open Sans', sans-serif;
+
+	}
+	.projectSlide hr{
+		width: 50%;
+		border-width: 1px;
+		border-color: rgba(50, 51, 119, 0.5);
+	}
+
+	.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23111' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23111' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+}
+
+.carousel-indicators li{
+    background-color: gray;
+}
+.carousel-indicators .active{
+    background-color: black;
+}
+
+	body{
+		padding: 0;
+		margin: 0;
+		overflow-x: hidden;
+
+		background-size: 40px 40px;
+		background-image: radial-gradient(circle, gray 1px, white 1px)
+	}
+
+	#svgContainer{
+		position: relative;
+	}
+	#verticleLineSVGBox{
+		width: 100%;
+		position: absolute;
+
+	}
+	#verticleLine{
+		display: absolute;
+		stroke: rgb(69,73,78); stroke-width:0.8
+	}
+
+	.branch{
+		width: 50%;
+	}
+	#leftBranch{
+		float:left;
+		text-align:right;
+	}
+	#rightBranch{
+		float: right;
+	}
+
+	#projectLeaf{
+		padding-left: 10%;
+		padding-right:10%;
+		background-color: rgba(255,255,255,0.3);
+		border-bottom: 3px solid rgb(69,73,78);;
+	}
+
+	#projectLeafSpace{
+		height: 20%;
+	}
